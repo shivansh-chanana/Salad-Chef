@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     #region Player Variables
     public player thisPlayer;
     public float moveSpeed;
+    public float chopTime;
     public List<string> currentItems;
     [Space]
     [SerializeField]
@@ -32,10 +33,16 @@ public class PlayerScript : MonoBehaviour
     string collidername;
     [SerializeField]
     bool canPressButton;
+    [SerializeField]
+    bool isChopping;
+    [SerializeField]
+    float curChoppingTime;
 
     float x;
     float z;
     UiManager uiManager;
+    ChopperScript lastChopper;
+    int lastChopperNumber;
     #endregion
 
     #region Player Components
@@ -58,6 +65,9 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        //If Chopping then dont proceed;
+        if (isChopping) return;
+
         //Controls
         PlayerControls();
     }
@@ -87,6 +97,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     void GetCurrentPickupSpot(string pickupSpotName) {
+
         switch (pickupSpotName) {
 
             case "cucumber":
@@ -110,7 +121,8 @@ public class PlayerScript : MonoBehaviour
             case "trash":
                 currentPickupSpot = allPickupSpot.trash;
                 break;
-            case "chopper":
+            case "chopper_1":
+            case "chopper_2":
                 currentPickupSpot = allPickupSpot.chopper;
                 break;
             case "plate":
@@ -125,7 +137,7 @@ public class PlayerScript : MonoBehaviour
         if (currentItems.Count < 2 && currentPickupSpot != allPickupSpot.trash && currentPickupSpot != allPickupSpot.chopper && currentPickupSpot != allPickupSpot.none && currentPickupSpot != allPickupSpot.plate)
         {
             currentItems.Add(pickupSpotName);
-            uiManager.AddItem((int)thisPlayer + 1);
+            uiManager.AddItem((int)thisPlayer + 1,(int)currentPickupSpot);
         }
         else
         {
@@ -134,6 +146,12 @@ public class PlayerScript : MonoBehaviour
             {
                 currentItems.Clear();
                 uiManager.RemoveItem((int)thisPlayer + 1);
+            }
+
+            //Trash can selected
+            if (currentPickupSpot == allPickupSpot.chopper && currentItems.Count > 0)
+            {
+                StartCoroutine(StartChopperTimer());
             }
 
             //Error inventory full
@@ -145,10 +163,37 @@ public class PlayerScript : MonoBehaviour
     {
         canPressButton = true;
         collidername = other.name;
+        if ((other.name == "chopper_1" || other.name == "chopper_2") && lastChopper == null)
+        {
+            lastChopper = other.GetComponent<ChopperScript>();
+            if (other.name == "chopper_1") lastChopperNumber = 1;
+            else lastChopperNumber = 2;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         canPressButton = false;
+        lastChopper = null;
     }
+
+    IEnumerator StartChopperTimer() {
+        curChoppingTime = chopTime;
+        isChopping = true;
+
+        do {
+            curChoppingTime--;
+            yield return new WaitForSeconds(1);
+        } while (curChoppingTime > 0);
+
+        isChopping = false;
+        lastChopper.currentItems.Add(currentItems[0]);
+        uiManager.AddItemInChopper(lastChopperNumber,(int)currentPickupSpot + 1);
+        currentItems.RemoveAt(0);
+        uiManager.RemoveItem((int)thisPlayer + 1,1);
+        yield return null;
+    }
+
+
+
 }

@@ -7,3 +7,5 @@ Create Environment
 Assign Controls of Players
 
 Vegetables : Pickup , Dispose
+
+Vegetables : Chop and Combination
