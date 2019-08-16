@@ -5,3 +5,5 @@ Tasks :
 
 Create Environment
 Assign Controls of Players
+
+Vegetables : Pickup , Dispose
