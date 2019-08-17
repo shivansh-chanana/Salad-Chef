@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
         player_1,
         player_2
     }
+
     public enum allPickupSpot {
         none,
         cucumber,
@@ -39,11 +40,16 @@ public class PlayerScript : MonoBehaviour
     float curChoppingTime;
     [SerializeField]
     bool hasTakenChopperItem;
+    [SerializeField]
+    bool canSendCombination;
+    [SerializeField]
+    int currentCustomer;
 
     float x;
     float z;
     UiManager uiManager;
     ChopperScript lastChopper;
+    PeopleManager peopleManager;
     int lastChopperNumber;
     #endregion
 
@@ -57,7 +63,8 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //get UI Manager
         uiManager = FindObjectOfType<UiManager>();
-
+        //get people Manager
+        peopleManager = FindObjectOfType<PeopleManager>();
         //Set tag according to player
         #region Set tag
         if (thisPlayer == player.player_1) tag = "Player_1";
@@ -81,8 +88,18 @@ public class PlayerScript : MonoBehaviour
         if (thisPlayer == player.player_1) {
             x = Input.GetAxis("Horizontal");
             z = Input.GetAxis("Vertical");
-            if (Input.GetKeyDown(KeyCode.F) && canPressButton) GetCurrentPickupSpot(collidername);
-        }
+            if (Input.GetKeyDown(KeyCode.F) && canPressButton){
+                if (canSendCombination && hasTakenChopperItem)
+                {
+                    peopleManager.CheckCombination(1, currentItems);
+                    currentItems.Clear();
+                    uiManager.RemoveItem(1, 0);
+                    hasTakenChopperItem = false;
+                    canSendCombination = false;
+                }
+                else GetCurrentPickupSpot(collidername);
+            }
+        } 
         #endregion
 
         #region Controls for player 2
@@ -91,7 +108,17 @@ public class PlayerScript : MonoBehaviour
         {
             x = Input.GetAxis("HorizontalPlayer_2");
             z = Input.GetAxis("VerticalPlayer_2");
-            if(Input.GetKeyDown(KeyCode.Comma) && canPressButton) GetCurrentPickupSpot(collidername);
+            if (Input.GetKeyDown(KeyCode.Comma) && canPressButton) {
+                if (canSendCombination && hasTakenChopperItem)
+                {
+                    peopleManager.CheckCombination(currentCustomer, currentItems);
+                    currentItems.Clear();
+                    uiManager.RemoveItem(2, 0);
+                    hasTakenChopperItem = false;
+                    canSendCombination = false;
+                }
+                else GetCurrentPickupSpot(collidername);
+            }
         }
         #endregion
 
@@ -184,6 +211,28 @@ public class PlayerScript : MonoBehaviour
     {
         canPressButton = true;
         collidername = other.name;
+
+        if (other.CompareTag("Customer"))
+        {
+            if (other.name == "customer_1")
+            {
+                canSendCombination = true;
+                currentCustomer = 1;
+            } else if (other.name == "customer_2") {
+                canSendCombination = true;
+                currentCustomer = 2;
+            } else if (other.name == "customer_3")
+            {
+                canSendCombination = true;
+                currentCustomer = 3;
+            }
+
+            return;
+        }
+        else {
+            canSendCombination = false;
+        }
+
         if ((other.name == "chopper_1" || other.name == "chopper_2") && lastChopper == null)
         {
             lastChopper = other.GetComponent<ChopperScript>();
@@ -196,6 +245,7 @@ public class PlayerScript : MonoBehaviour
     {
         canPressButton = false;
         lastChopper = null;
+        canSendCombination = false;
     }
 
     IEnumerator StartChopperTimer() {

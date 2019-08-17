@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a157da8852d9f40aa8e94d3d5a855087
+guid: 9feb81633182b42eaaefc62e11dd6c19
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -35,9 +35,6 @@ TextureImporter:
   - first:
       213: -6131260773143074979
     second: Vegetables_10
-  - first:
-      213: 278819641860847631
-    second: Vegetables_11
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -56,7 +53,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
@@ -68,7 +65,7 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -139,13 +136,13 @@ TextureImporter:
         width: 175
         height: 177.66667
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c18ea2e4971ac4a4db0130eed44ba863
+      spriteID: 7046fcadfe6164e77b5f4ada35519e1a
       internalID: -8663739424785624238
       vertices: []
       indices: 
@@ -156,17 +153,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 175
-        y: 355.3333
+        y: 355
         width: 175
-        height: 177.66667
+        height: 178
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59bc8aca15f9649b48f9c3d82ef114b6
+      spriteID: d047ad93850204767ac9c7a55c2c94ee
       internalID: 8515852673137835333
       vertices: []
       indices: 
@@ -177,17 +174,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 350
-        y: 355.3333
+        y: 355
         width: 175
-        height: 177.66667
+        height: 178
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4712585ed4dcc461d8fa06f3e177e5c1
+      spriteID: 807d32e5b12c749bc82c5fa7f8c79208
       internalID: 1417505126726901776
       vertices: []
       indices: 
@@ -197,18 +194,18 @@ TextureImporter:
       name: Vegetables_3
       rect:
         serializedVersion: 2
-        x: 525
-        y: 355.3333
-        width: 175
-        height: 177.66667
+        x: 544
+        y: 355
+        width: 156
+        height: 178
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 531c122d03903425cb538bc65cf135ed
+      spriteID: b8a7dd6fe493f4aaa922fdb32d21bfa5
       internalID: 830478538347399227
       vertices: []
       indices: 
@@ -219,17 +216,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 178.33333
-        width: 175
-        height: 177.66667
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 178
+        width: 162
+        height: 178
+      alignment: 9
+      pivot: {x: 0.42248064, y: 0.5127025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a292822636094bb495e14512d2ea587
+      spriteID: d0b312e0632094a239b9224dba25074f
       internalID: -7581034867459890332
       vertices: []
       indices: 
@@ -239,18 +236,18 @@ TextureImporter:
       name: Vegetables_5
       rect:
         serializedVersion: 2
-        x: 175
+        x: 350
         y: 178.33333
         width: 175
         height: 177.66667
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83bb05dc7b6bf40a9a9f99523fbcaa50
+      spriteID: 9065bc09f8e674ba49a0c2edcfa2d878
       internalID: 48719161223466123
       vertices: []
       indices: 
@@ -260,18 +257,18 @@ TextureImporter:
       name: Vegetables_6
       rect:
         serializedVersion: 2
-        x: 350
+        x: 525
         y: 178.33333
         width: 175
         height: 177.66667
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e121ce45ac4b349fc8c5fea16bfcdbfa
+      spriteID: c69c0ccdcf9394a9ca8411db45de4964
       internalID: -4224434159975881483
       vertices: []
       indices: 
@@ -281,18 +278,18 @@ TextureImporter:
       name: Vegetables_7
       rect:
         serializedVersion: 2
-        x: 525
-        y: 178.33333
+        x: 0
+        y: 1.3333282
         width: 175
         height: 177.66667
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 668da987d973f4c8f89ef1f8c9de011a
+      spriteID: c47244cf1495f400f9a378bc727c1333
       internalID: -2631695199865580167
       vertices: []
       indices: 
@@ -302,18 +299,18 @@ TextureImporter:
       name: Vegetables_8
       rect:
         serializedVersion: 2
-        x: 0
+        x: 175
         y: 1.3333282
         width: 175
         height: 177.66667
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d046f4b47c270407fa9b5864d62b1692
+      spriteID: 602ea4e4ffeb54bf68f9276b740c7507
       internalID: 6010418813259896644
       vertices: []
       indices: 
@@ -323,18 +320,18 @@ TextureImporter:
       name: Vegetables_9
       rect:
         serializedVersion: 2
-        x: 175
+        x: 350
         y: 1.3333282
         width: 175
         height: 177.66667
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21b8d1ae5fc5f4b43a256e5d1d989735
+      spriteID: 02d7f60ba7ad64d22b1bbb32d119f04b
       internalID: 9057263682792052942
       vertices: []
       indices: 
@@ -344,40 +341,19 @@ TextureImporter:
       name: Vegetables_10
       rect:
         serializedVersion: 2
-        x: 350
-        y: 1.3333282
-        width: 175
-        height: 177.66667
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 94cd085dae4094baa9d44d5a859425f4
-      internalID: -6131260773143074979
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Vegetables_11
-      rect:
-        serializedVersion: 2
         x: 525
         y: 1.3333282
         width: 175
         height: 177.66667
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54267464ec3144f4696792a4bddb421b
-      internalID: 278819641860847631
+      spriteID: 1677a3d86dac04fd8a63b18f1a144f8d
+      internalID: -6131260773143074979
       vertices: []
       indices: 
       edges: []
@@ -385,7 +361,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 894e1e55ca32f401187f7987cdf85770
+    spriteID: 6ec2458d55f784a5b87cd18cbe8b111a
     internalID: 0
     vertices: []
     indices: 
