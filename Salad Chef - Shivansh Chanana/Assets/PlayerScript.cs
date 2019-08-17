@@ -37,6 +37,8 @@ public class PlayerScript : MonoBehaviour
     bool isChopping;
     [SerializeField]
     float curChoppingTime;
+    [SerializeField]
+    bool hasTakenChopperItem;
 
     float x;
     float z;
@@ -134,28 +136,47 @@ public class PlayerScript : MonoBehaviour
         }
 
         //Add item to list
-        if (currentItems.Count < 2 && currentPickupSpot != allPickupSpot.trash && currentPickupSpot != allPickupSpot.chopper && currentPickupSpot != allPickupSpot.none && currentPickupSpot != allPickupSpot.plate)
+        if (currentItems.Count < 2 && currentPickupSpot != allPickupSpot.trash && currentPickupSpot != allPickupSpot.chopper &&
+            currentPickupSpot != allPickupSpot.none && currentPickupSpot != allPickupSpot.plate && !hasTakenChopperItem)
         {
             currentItems.Add(pickupSpotName);
-            uiManager.AddItem((int)thisPlayer + 1,(int)currentPickupSpot);
+            uiManager.AddItem((int)thisPlayer + 1, pickupSpotName);
         }
         else
         {
-            //Trash can selected
+            //Trash Can selected
             if (currentPickupSpot == allPickupSpot.trash)
             {
                 currentItems.Clear();
                 uiManager.RemoveItem((int)thisPlayer + 1);
+
+                hasTakenChopperItem = false;
+
+                Debug.Log("MINUS POINTS");
             }
 
-            //Trash can selected
-            if (currentPickupSpot == allPickupSpot.chopper && currentItems.Count > 0)
+            //Chopper selected
+            if (currentPickupSpot == allPickupSpot.chopper)
             {
-                StartCoroutine(StartChopperTimer());
+                //Has items to put in chopper
+                if (lastChopper.currentItems.Count < 3 && currentItems.Count > 0) StartCoroutine(StartChopperTimer());
+                else if (currentItems.Count == 0) {
+                    //get items from chopper
+                    for (int i = 0; i < lastChopper.currentItems.Count;i++) {
+                        currentItems.Add(lastChopper.currentItems[i]);
+                        uiManager.AddItem((int)thisPlayer + 1, lastChopper.currentItems[i]);
+                    }
+                    lastChopper.currentItems.Clear();
+                    uiManager.RemoveItemFromChopper(lastChopperNumber);
+                    hasTakenChopperItem = true;
+                }
+                else Debug.Log("CHOPPER FILLED");
             }
 
             //Error inventory full
-            if (currentItems.Count >= 2)Debug.Log("ALREADY HAS 2 ITEMS");
+            if (currentItems.Count >= 2 && currentPickupSpot != allPickupSpot.trash && currentPickupSpot != allPickupSpot.chopper &&
+                currentPickupSpot != allPickupSpot.none && currentPickupSpot != allPickupSpot.plate && !hasTakenChopperItem)
+                Debug.Log("ALREADY HAS 2 ITEMS");
         }
     }
 
@@ -188,7 +209,7 @@ public class PlayerScript : MonoBehaviour
 
         isChopping = false;
         lastChopper.currentItems.Add(currentItems[0]);
-        uiManager.AddItemInChopper(lastChopperNumber,(int)currentPickupSpot + 1);
+        uiManager.AddItemInChopper(lastChopperNumber,currentItems[0]);
         currentItems.RemoveAt(0);
         uiManager.RemoveItem((int)thisPlayer + 1,1);
         yield return null;

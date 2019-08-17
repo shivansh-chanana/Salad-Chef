@@ -26,7 +26,8 @@ public class UiManager : MonoBehaviour
         ChopperHudPosition();
     }
 
-    void ChopperHudPosition() {
+    void ChopperHudPosition()
+    {
         hudChopper_1.transform.position = mainCam.WorldToScreenPoint(chopper_1.transform.position) + hudOffset;
         hudChopper_2.transform.position = mainCam.WorldToScreenPoint(chopper_2.transform.position) + hudOffset;
     }
@@ -41,17 +42,19 @@ public class UiManager : MonoBehaviour
     }
 
     //Add Item in HUD PLAYER parent to show on screen
-    public void AddItem(int playerNum = 1, int imgNum = 0) {
+    public void AddItem(int playerNum = 1, string vegetableName = "null")
+    {
         if (playerNum == 1)
         {
-            Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, hudPlayer_1.transform).GetComponent<Image>().sprite = imgSprite[imgNum];
+            Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, hudPlayer_1.transform).GetComponent<Image>().sprite = GetItemImage(vegetableName);
         }
-        else {
-            Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, hudPlayer_2.transform).GetComponent<Image>().sprite = imgSprite[imgNum];
+        else
+        {
+            Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, hudPlayer_2.transform).GetComponent<Image>().sprite = GetItemImage(vegetableName);
         }
     }
     //Remove Item from HUD PLAYER parent
-    public void RemoveItem(int playerNum = 1,int numOfItemsToRemove = 0)
+    public void RemoveItem(int playerNum = 1, int numOfItemsToRemove = 0)
     {
         if (playerNum == 1)
         {
@@ -62,8 +65,10 @@ public class UiManager : MonoBehaviour
                     Destroy(child.gameObject);
                 }
             }
-            else {
-                for (int i = 0; i < numOfItemsToRemove;i++) {
+            else
+            {
+                for (int i = 0; i < numOfItemsToRemove; i++)
+                {
                     Destroy(hudPlayer_1.GetChild(i).gameObject);
                 }
             }
@@ -87,14 +92,54 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    public void AddItemInChopper(int chopperNum,int imgNum) {
+    public void AddItemInChopper(int chopperNum, string vegetableName)
+    {
         if (chopperNum == 1)
         {
-            Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, hudChopper_1.transform).GetComponent<Image>().sprite = imgSprite[imgNum];
+            Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, hudChopper_1.transform).GetComponent<Image>().sprite = GetItemImage(vegetableName);
         }
         else
         {
-            Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, hudChopper_2.transform).GetComponent<Image>().sprite = imgSprite[imgNum];
+            Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, hudChopper_2.transform).GetComponent<Image>().sprite = GetItemImage(vegetableName);
         }
+    }
+
+    public void RemoveItemFromChopper(int chopperNum)
+    {
+        if (chopperNum == 1)
+        {
+            foreach (Transform child in hudChopper_1)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        else
+        {
+            foreach (Transform child in hudChopper_2)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    Sprite GetItemImage(string pickupSpotName)
+    {
+
+        switch (pickupSpotName)
+        {
+            case "cucumber":
+                return imgSprite[0];
+            case "eggplant":
+                return imgSprite[1];
+            case "pumpkin":
+                return imgSprite[2];
+            case "tomato":
+                return imgSprite[3];
+            case "whiteRadish":
+                return imgSprite[4];
+            case "paprika":
+                return imgSprite[5];
+        }
+        return null;
     }
 }
